@@ -33,8 +33,8 @@ __global__ void equi2cube(const cv::cuda::PtrStep<uchar3> src, cv::cuda::PtrStep
 
 	float sqr = inputWidth / 4.0;
 
-	const int dst_x = blockDim.x * blockIdx.x + threadIdx.x;
-	const int dst_y = blockDim.y * blockIdx.y + threadIdx.y;
+	int dst_x = blockDim.x * blockIdx.x + threadIdx.x;
+	int dst_y = blockDim.y * blockIdx.y + threadIdx.y;
 
 	float tx = 0;
 	float ty = 0;
@@ -51,10 +51,10 @@ __global__ void equi2cube(const cv::cuda::PtrStep<uchar3> src, cv::cuda::PtrStep
 
 	// iterate over pixels output image
 	// height and width inclusive
-	if (dst_x < dcols && dst_y < drows &&
-		dst_x > 1 && dst_y > 1)
+	if (dst_x < dcols && dst_y < drows)
 	{
-
+		dst_x += 1;
+		dst_y += 1;
 		// local coordinates for the cube map face.
 		tx = 0;
 		ty = 0;

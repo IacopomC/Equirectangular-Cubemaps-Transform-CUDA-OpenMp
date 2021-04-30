@@ -36,7 +36,7 @@ int main(int argc, char** argv)
     d_result.upload(h_result);
 
     equi2cubeCUDA(d_img, d_result);
-
+    
     // =========== CUBE MAP TO EQUILATERAL ========== //
     cv::Mat_<cv::Vec3b> negx;
     cv::Mat_<cv::Vec3b> posx;
@@ -71,8 +71,6 @@ int main(int argc, char** argv)
 
     cv::Size new_Size_equi(equiWidth, equiHeight);
     cv::Mat_<cv::Vec3b> h_result_equi(new_Size_equi);
-
-    d_result.download(h_result_equi);
 
     d_result_equi.upload(h_result_equi);
     d_negx.upload(negx);

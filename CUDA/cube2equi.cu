@@ -26,7 +26,7 @@ __global__ void cube2equi(const cv::cuda::PtrStep<uchar3> posy, const cv::cuda::
 	float imageSelect = 0;
 
 	float increment = (dims * 2) / 100;
-	int	counter = 0;
+	float counter = 0;
 	float percentCounter = 0;
 
 	const int dst_x = blockDim.x * blockIdx.x + threadIdx.x;
@@ -79,42 +79,42 @@ __global__ void cube2equi(const cv::cuda::PtrStep<uchar3> posy, const cv::cuda::
 		// square 1 left
 		if (yy == -1)
 		{
-			xPixel = int(((-1.0 * tan(atan(x / y)) + 1.0) / 2.0) * dims);
-			yTemp = int(((-1.0 * tan(atan(z / y)) + 1.0) / 2.0) * (dims - 1.0));
+			xPixel = (((-1.0 * tan(atan(x / y)) + 1.0) / 2.0) * dims);
+			yTemp = (((-1.0 * tan(atan(z / y)) + 1.0) / 2.0) * (dims - 1.0));
 			imageSelect = 1;
 		}
 		// square 2; front
 		else if (xx == 1)
 		{
-			xPixel = int(((tan(atan(y / x)) + 1.0) / 2.0) * dims);
-			yTemp = int(((tan(atan(z / x)) + 1.0) / 2.0) * dims);
+			xPixel = (((tan(atan(y / x)) + 1.0) / 2.0) * dims);
+			yTemp = (((tan(atan(z / x)) + 1.0) / 2.0) * dims);
 			imageSelect = 2;
 		}
 		// square 3; right
 		else if (yy == 1)
 		{
-			xPixel = int(((-1 * tan(atan(x / y)) + 1.0) / 2.0) * dims);
-			yTemp = int(((tan(atan(z / y)) + 1.0) / 2.0) * (dims - 1));
+			xPixel = (((-1 * tan(atan(x / y)) + 1.0) / 2.0) * dims);
+			yTemp = (((tan(atan(z / y)) + 1.0) / 2.0) * (dims - 1));
 			imageSelect = 3;
 		}
 		// square 4; back
 		else if (xx == -1) {
-			xPixel = int(((tan(atan(y / x)) + 1.0) / 2.0) * dims);
-			yTemp = int(((-1 * tan(atan(z / x)) + 1.0) / 2.0) * (dims - 1));
+			xPixel = (((tan(atan(y / x)) + 1.0) / 2.0) * dims);
+			yTemp = (((-1 * tan(atan(z / x)) + 1.0) / 2.0) * (dims - 1));
 			imageSelect = 4;
 		}
 		// square 5; bottom
 		else if (zz == 1)
 		{
-			xPixel = int(((tan(atan(y / z)) + 1.0) / 2.0) * dims);
-			yTemp = int(((-1 * tan(atan(x / z)) + 1.0) / 2.0) * (dims - 1));
+			xPixel = (((tan(atan(y / z)) + 1.0) / 2.0) * dims);
+			yTemp = (((-1 * tan(atan(x / z)) + 1.0) / 2.0) * (dims - 1));
 			imageSelect = 5;
 		}
 		// square 6; top
 		else if (zz == -1)
 		{
-			xPixel = int(((-1 * tan(atan(y / z)) + 1.0) / 2.0) * dims);
-			yTemp = int(((-1 * tan(atan(x / z)) + 1.0) / 2.0) * (dims - 1));
+			xPixel = (((-1 * tan(atan(y / z)) + 1.0) / 2.0) * dims);
+			yTemp = (((-1 * tan(atan(x / z)) + 1.0) / 2.0) * (dims - 1));
 			imageSelect = 6;
 		}
 
